@@ -85,7 +85,7 @@ const WriteModal = () => {
           <label className='block mb-2 text-[20px] '>
             판매수량
             <input
-              type='text'
+              type='number'
               name='book_sold'
               className='w-full border rounded px-2 py-1 mt-1'
               value={writeData.book_sold}

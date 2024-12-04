@@ -57,6 +57,10 @@ export const updateBooks = async (bookData: BookType) => {
 };
 export const deleteBooks = async (bookDataId: string) => {
   const { error } = await supabase.from('books').delete().eq('id', bookDataId);
+
+  if (error) {
+    throw new Error(error.message);
+  }
 };
 
 export const getStoragePublicUrl = async (file: File) => {
@@ -67,7 +71,7 @@ export const getStoragePublicUrl = async (file: File) => {
     const { data, error } = await supabase.storage.from('books').upload(filePath, file);
 
     if (error) {
-      throw error;
+      throw new Error(error.message);
     }
 
     const { data: urlData } = supabase.storage.from('books').getPublicUrl(data.path);
