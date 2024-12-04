@@ -1,12 +1,13 @@
 'use client';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import Button from './Button';
 import { useGetBooks } from '@/hooks/queries/useBooks';
 import { useDebounce } from '@/hooks/useDebounce';
 import Link from 'next/link';
+import { BookType } from '@/types/book.types';
 
 type SearchBoxProps = {
-  setFilteredBooks: (books: any[]) => void;
+  setFilteredBooks: (books: BookType[]) => void;
 };
 
 const SearchBox = ({ setFilteredBooks }: SearchBoxProps) => {
