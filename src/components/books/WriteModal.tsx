@@ -14,6 +14,7 @@ const WriteModal = () => {
     book_image: '',
     book_name: '',
     book_content: '',
+    book_sold: 0,
   });
 
   const handleOpenModal = () => setIsModalOpen(true);
@@ -52,6 +53,7 @@ const WriteModal = () => {
       book_image: '',
       book_name: '',
       book_content: '',
+      book_sold: 0,
     });
   };
 
@@ -77,6 +79,17 @@ const WriteModal = () => {
               name='book_image'
               className='flex-1 border rounded px-2 py-1 mt-1 cursor-pointer'
               onChange={handleFileChange}
+              required
+            />
+          </label>
+          <label className='block mb-2 text-[20px] '>
+            판매수량
+            <input
+              type='text'
+              name='book_sold'
+              className='w-full border rounded px-2 py-1 mt-1'
+              value={writeData.book_sold}
+              onChange={handleChange}
               required
             />
           </label>
