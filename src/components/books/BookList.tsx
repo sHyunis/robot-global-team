@@ -1,24 +1,31 @@
 'use client';
 import { useGetBooks } from '@/hooks/queries/useBooks';
 import BookCard from './BookCard';
+import Link from 'next/link';
+import { BookType } from '@/types/book.types';
 
-const BookList = () => {
+type BookListProps = {
+  books: BookType[] | null;
+};
+
+const BookList: React.FC<BookListProps> = ({ books }) => {
   const { data: bookData } = useGetBooks();
+
+  const displayBooks = books && books.length > 0 ? books : bookData;
 
   return (
     <div>
-      {bookData ? (
-        <div className='grid grid-cols-5 grid-rows-2 gap-4 '>
-          {bookData?.map((book) => (
-            <BookCard
-              book={book}
-              key={book.id}
-            />
-          ))}
-        </div>
-      ) : (
-        <div>등록된 책이 없습니다.</div>
-      )}
+      <div className='grid grid-cols-5 grid-rows-2 gap-4 '>
+        {displayBooks?.map((book) => (
+          <Link
+            href={`/detail/${book.id}`}
+            key={book.id}
+            className='cursor-pointer'
+          >
+            <BookCard book={book} />
+          </Link>
+        ))}
+      </div>
     </div>
   );
 };

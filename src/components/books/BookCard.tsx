@@ -6,7 +6,7 @@ type BookCardProps = {
 };
 const BookCard: React.FC<BookCardProps> = ({ book }) => {
   return (
-    <div className='border border-solid border-gray-800 rounded px-4 py-2 w-[300px] h-[400px] flex flex-col justify-center items-center '>
+    <div className='border border-solid border-gray-800 rounded px-4 py-2 w-full h-full flex flex-col justify-center items-center '>
       {book?.book_image ? (
         <>
           <Image

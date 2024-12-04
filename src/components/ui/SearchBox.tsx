@@ -3,41 +3,57 @@ import { useState, useEffect } from 'react';
 import Button from './Button';
 import { useGetBooks } from '@/hooks/queries/useBooks';
 import { useDebounce } from '@/hooks/useDebounce';
+import Link from 'next/link';
 
-const SearchBox = () => {
+type SearchBoxProps = {
+  setFilteredBooks: (books: any[]) => void;
+};
+
+const SearchBox = ({ setFilteredBooks }: SearchBoxProps) => {
   const [searchContent, setSearchContent] = useState<string>('');
   const [searchOption, setSearchOption] = useState<string>('title');
-  const [filteredBooks, setFilteredBooks] = useState<any[]>([]);
-
   const { data: BookData } = useGetBooks();
 
   const debouncedSearchContent = useDebounce(searchContent, 500);
 
-  useEffect(() => {
-    if (debouncedSearchContent && BookData) {
-      const filtered = BookData.filter((book) => {
-        if (searchOption === 'title') {
-          return book.book_name.toLowerCase().includes(debouncedSearchContent.toLowerCase());
-        }
-        if (searchOption === 'author') {
-          return book.author_name.toLowerCase().includes(debouncedSearchContent.toLowerCase());
-        }
-        return false;
-      });
-      setFilteredBooks(filtered);
-    } else {
-      setFilteredBooks([]);
-    }
-  }, [debouncedSearchContent, searchOption, BookData]);
+  const filteredBooksForPreview =
+    BookData?.filter((book) => {
+      if (searchOption === 'title') {
+        return book.book_name.toLowerCase().includes(debouncedSearchContent.toLowerCase());
+      }
+      if (searchOption === 'author') {
+        return book.book_writer.toLowerCase().includes(debouncedSearchContent.toLowerCase());
+      }
+      return false;
+    }) || [];
 
   const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearchContent(e.target.value);
   };
 
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    if (searchContent && BookData) {
+      const filtered = BookData.filter((book) => {
+        if (searchOption === 'title') {
+          return book.book_name.toLowerCase().includes(searchContent.toLowerCase());
+        }
+        if (searchOption === 'author') {
+          return book.book_writer.toLowerCase().includes(searchContent.toLowerCase());
+        }
+        return false;
+      });
+      setFilteredBooks(filtered);
+    } else {
+      setFilteredBooks(BookData || []);
+    }
+  };
+
   return (
     <div className='relative'>
       <form
-        onSubmit={(e) => e.preventDefault()}
+        onSubmit={handleSubmit}
         className='w-[800px] h-[60px] border-2 border-solid border-slate-700 rounded-[12px] flex items-center overflow-hidden '
       >
         <select
@@ -61,17 +77,19 @@ const SearchBox = () => {
         />
       </form>
 
-      {searchContent && (
+      {debouncedSearchContent && (
         <div className='absolute top-[60px] left-[75px] bg-slate-200 w-[630px] p-4 z-10'>
-          {filteredBooks.length > 0 ? (
+          {filteredBooksForPreview.length > 0 ? (
             <ul>
-              {filteredBooks.map((book) => (
-                <li
+              {filteredBooksForPreview.map((book) => (
+                <Link
                   key={book.id}
-                  className='p-2 border border-solid border-b border-l-0 border-r-0 border-t-0 border-black'
+                  href={`/detail/${book.id}`}
                 >
-                  <strong>{book.book_name}</strong> - {book.book_writer}
-                </li>
+                  <li className='p-2 border border-solid border-b border-l-0 border-r-0 border-t-0 border-black'>
+                    <strong>{book.book_name}</strong> - {book.book_writer}
+                  </li>
+                </Link>
               ))}
             </ul>
           ) : (
