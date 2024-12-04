@@ -9,6 +9,7 @@ const WriteModal = () => {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const [writeData, setWriteData] = useState<BookType>({
     id: '',
+    book_writer: '',
     book_image: '',
     book_name: '',
     book_content: '',
@@ -18,6 +19,17 @@ const WriteModal = () => {
   const handleCloseModal = () => setIsModalOpen(false);
 
   const addMutation = useAddBooks();
+
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      const fileName = `${uuidv4()}_${file.name}`;
+      setWriteData((prev) => ({
+        ...prev,
+        book_image: fileName,
+      }));
+    }
+  };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
@@ -33,6 +45,13 @@ const WriteModal = () => {
     const dataWithId = { ...writeData, id };
     addMutation.mutate(dataWithId);
     setIsModalOpen(false);
+    setWriteData({
+      id: '',
+      book_writer: '',
+      book_image: '',
+      book_name: '',
+      book_content: '',
+    });
   };
 
   return (
@@ -48,19 +67,19 @@ const WriteModal = () => {
         isOpen={isModalOpen}
         onClose={handleCloseModal}
       >
-        <h2 className='text-xl font-bold mb-4'>게시물 작성</h2>
+        <h2 className='text-[27px] font-bold mb-4 text-center'>게시물 작성</h2>
         <form onSubmit={handleSubmit}>
-          <label className='block mb-2 flex items-center gap-3'>
+          <label className='block mb-2 flex items-center gap-3 text-[20px] '>
             이미지
             <input
               type='file'
               name='book_image'
               className='flex-1 border rounded px-2 py-1 mt-1 cursor-pointer'
-              onChange={handleChange}
+              onChange={handleFileChange}
               required
             />
           </label>
-          <label className='block mb-2'>
+          <label className='block mb-2 text-[20px] '>
             제목
             <input
               type='text'
@@ -71,12 +90,23 @@ const WriteModal = () => {
               required
             />
           </label>
-          <label className='block mb-2'>
+          <label className='block mb-2 text-[20px] '>
+            작가
+            <input
+              type='text'
+              name='book_writer'
+              className='w-full border rounded px-2 py-1 mt-1'
+              value={writeData.book_writer}
+              onChange={handleChange}
+              required
+            />
+          </label>
+          <label className='block mb-2 text-[20px] '>
             내용
             <textarea
               name='book_content'
               className='w-full border rounded px-2 py-1 mt-1'
-              rows={4}
+              rows={12}
               value={writeData.book_content}
               onChange={handleChange}
               required

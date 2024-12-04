@@ -3,6 +3,7 @@ import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { QUERY_KEYS } from './queryKeys';
 import { addBooks, deleteBooks, getBooks, updateBooks } from '@/lib/book';
 import { BookType } from '@/types/book.types';
+import Swal from 'sweetalert2';
 
 const ROW = 10;
 
@@ -19,6 +20,16 @@ export const useAddBooks = () => {
     mutationFn: (bookData: BookType) => addBooks(bookData),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: QUERY_KEYS.books() });
+      Swal.fire({
+        icon: 'success',
+        text: '새 게시물이 성공적으로 등록되었습니다.',
+      });
+    },
+    onError: () => {
+      Swal.fire({
+        icon: 'error',
+        text: '게시물 등록에 실패했습니다.',
+      });
     },
   });
 };

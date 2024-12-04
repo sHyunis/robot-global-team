@@ -2,9 +2,9 @@
 import { useGetBooks } from '@/hooks/queries/useBooks';
 
 const BookList = () => {
-  const bookData = useGetBooks();
-  console.log(bookData);
-  return <div>BookList</div>;
+  const { data: bookData } = useGetBooks();
+
+  return <div>{}</div>;
 };
 
 export default BookList;
