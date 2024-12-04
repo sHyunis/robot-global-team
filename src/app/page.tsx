@@ -12,7 +12,7 @@ const Home = () => {
         <WriteModal />
       </div>
       <section className='w-full'>
-        <h2 className='text-[24px] font-bold'>책 목록</h2>
+        <h2 className='text-[24px] font-bold mb-[16px]'>책 목록</h2>
         <BookList />
       </section>
     </div>

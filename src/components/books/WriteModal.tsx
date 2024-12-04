@@ -4,6 +4,7 @@ import Modal from '../ui/Modal';
 import { useAddBooks } from '@/hooks/queries/useBooks';
 import { v4 as uuidv4 } from 'uuid';
 import { BookType } from '@/types/book.types';
+import { getStoragePublicUrl } from '@/lib/book';
 
 const WriteModal = () => {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
@@ -20,13 +21,13 @@ const WriteModal = () => {
 
   const addMutation = useAddBooks();
 
-  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (file) {
-      const fileName = `${uuidv4()}_${file.name}`;
+      const publicUrl = await getStoragePublicUrl(file);
       setWriteData((prev) => ({
         ...prev,
-        book_image: fileName,
+        book_image: publicUrl,
       }));
     }
   };
@@ -58,7 +59,7 @@ const WriteModal = () => {
     <div>
       <button
         onClick={handleOpenModal}
-        className='px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-700 font-bold'
+        className='px-4 py-2 bg-slate-700 text-white rounded hover:bg-blue-800 font-bold'
       >
         게시물 작성
       </button>
