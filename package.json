@@ -13,6 +13,8 @@
     "@supabase/supabase-js": "^2.46.2",
     "@tanstack/react-query": "^5.62.2",
     "@tanstack/react-query-devtools": "^5.62.2",
+    "eslint-config-prettier": "^9.1.0",
+    "eslint-plugin-prettier": "^5.2.1",
     "hydration": "link:@tanstack/react-query/hydration",
     "next": "15.0.3",
     "react": "19.0.0-rc-66855b96-20241106",
