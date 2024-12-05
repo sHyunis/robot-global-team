@@ -22,6 +22,14 @@
 - 게시물 수정
 - 상세 정보 조회
 
+# 메인페이지
+
+![](https://velog.velcdn.com/images/alice0751/post/aec94032-c7c6-4ce5-9e82-a6c6a9c9c785/image.png)
+
+# 상세페이지
+
+![](https://velog.velcdn.com/images/alice0751/post/654b0d08-6134-47e1-ab5f-267b3474100c/image.png)
+
 ## 기술 스택
 
 **패키지 매니저**

@@ -117,14 +117,14 @@ const BookFormModal: React.FC<BookFormModalProps> = ({ initialData, onSubmit, is
             ))}
           </div>
           <label className='block mb-2 font-medium text-[16px]'>
-            내용 (600자 이하)
+            내용 (400자 이하)
             <textarea
               name='book_content'
               className='w-full border rounded px-2 py-1 mt-1'
               rows={6}
               value={formData.book_content}
               onChange={handleChange}
-              maxLength={600}
+              maxLength={400}
               required
             ></textarea>
           </label>
