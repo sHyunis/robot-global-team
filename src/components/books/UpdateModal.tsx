@@ -40,6 +40,7 @@ const UpdateModal: React.FC<UpdateModalId> = ({ bookData }) => {
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
+
     setWriteData((prev) => ({
       ...prev,
       [name]: name === 'book_sold' ? Number(value) : value,
@@ -48,7 +49,7 @@ const UpdateModal: React.FC<UpdateModalId> = ({ bookData }) => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-
+    console.log('Submitting Data:', writeData);
     updateMutation.mutate({ bookData: writeData, id: bookData.id });
 
     setIsModalOpen(false);

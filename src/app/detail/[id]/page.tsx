@@ -22,7 +22,7 @@ const DetailPage = () => {
   ];
 
   return (
-    <div className='flex-col  justify-center items-center w-[1400px] mx-auto pt-16 relative '>
+    <div className='min-h-screen flex-col  justify-center items-center w-[1400px] mx-auto pt-16 relative '>
       <div className='absolute right-0'>
         <UpdateModal bookData={bookData} />
       </div>

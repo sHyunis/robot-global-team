@@ -28,6 +28,7 @@ export const addBooks = async (bookData: BookType) => {
       book_image: bookData.book_image,
       book_name: bookData.book_name,
       book_content: bookData.book_content,
+      book_sold: bookData.book_sold,
     });
 
     if (error) {
@@ -48,6 +49,7 @@ export const updateBooks = async (bookData: BookType, id: string) => {
       book_image: bookData.book_image,
       book_name: bookData.book_name,
       book_content: bookData.book_content,
+      book_sold: bookData.book_sold,
     })
     .eq('id', id);
 
