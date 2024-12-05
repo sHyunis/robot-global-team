@@ -1,16 +1,11 @@
-const nextConfig = {
+module.exports = {
   images: {
+    domains: ['udcpwzniohyjpadzbtbg.supabase.co'],
     remotePatterns: [
       {
         protocol: 'https',
-
         hostname: 'udcpwzniohyjpadzbtbg.supabase.co',
-        port: '',
-        pathname: '/**',
       },
     ],
-    formats: ['image/avif', 'image/webp'],
   },
 };
-
-module.exports = nextConfig;
