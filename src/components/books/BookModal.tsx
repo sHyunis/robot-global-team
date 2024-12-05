@@ -5,7 +5,6 @@ import { getStoragePublicUrl } from '@/lib/book';
 import Button from '../ui/Button';
 import Input from '../ui/Input';
 import Image from 'next/image';
-import { v4 as uuidv4 } from 'uuid';
 
 type BookFormModalProps = {
   initialData: BookType;
