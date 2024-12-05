@@ -3,6 +3,7 @@ import './globals.css';
 import Header from '@/components/layouts/Header';
 import Providers from './providers';
 import localFont from 'next/font/local';
+import Footer from '@/components/layouts/Footer';
 
 export const metadata: Metadata = {
   title: 'Book store',
@@ -26,6 +27,7 @@ export default function RootLayout({
         <Providers>
           <Header />
           {children}
+          <Footer />
         </Providers>
       </body>
     </html>

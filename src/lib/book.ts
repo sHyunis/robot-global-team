@@ -28,6 +28,7 @@ export const addBooks = async (bookData: BookType) => {
       book_image: bookData.book_image,
       book_name: bookData.book_name,
       book_content: bookData.book_content,
+      book_sold: bookData.book_sold,
     });
 
     if (error) {
@@ -39,7 +40,7 @@ export const addBooks = async (bookData: BookType) => {
   }
 };
 
-export const updateBooks = async (bookData: BookType) => {
+export const updateBooks = async (bookData: BookType, id: string) => {
   const { error } = await supabase
     .from('books')
     .update({
@@ -48,8 +49,9 @@ export const updateBooks = async (bookData: BookType) => {
       book_image: bookData.book_image,
       book_name: bookData.book_name,
       book_content: bookData.book_content,
+      book_sold: bookData.book_sold,
     })
-    .eq('id', bookData.id);
+    .eq('id', id);
 
   if (error) {
     throw new Error(error.message);

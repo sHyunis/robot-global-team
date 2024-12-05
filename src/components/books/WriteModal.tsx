@@ -37,8 +37,9 @@ const WriteModal = () => {
     const { name, value } = e.target;
     setWriteData((prev) => ({
       ...prev,
-      [name]: value,
+      [name]: name === 'book_sold' ? Number(value) : value,
     }));
+    console.log(e.target.value);
   };
 
   const handleSubmit = (e: React.FormEvent) => {

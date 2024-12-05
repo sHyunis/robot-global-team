@@ -40,6 +40,16 @@ export const useDeleteBooks = () => {
     mutationFn: (bookId: string) => deleteBooks(bookId),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: QUERY_KEYS.books() });
+      Swal.fire({
+        icon: 'success',
+        text: '게시물이 삭제되었습니다.',
+      });
+    },
+    onError: () => {
+      Swal.fire({
+        icon: 'error',
+        text: '게시물 삭제에 실패했습니다.',
+      });
     },
   });
 };
@@ -47,9 +57,19 @@ export const useDeleteBooks = () => {
 export const useUpdateBooks = () => {
   const queryClient = useQueryClient();
   return useMutation({
-    mutationFn: (bookData: BookType) => updateBooks(bookData),
+    mutationFn: ({ bookData, id }: { bookData: BookType; id: string }) => updateBooks(bookData, id),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: QUERY_KEYS.books() });
+      Swal.fire({
+        icon: 'success',
+        text: '게시물이 수정이 완료되었습니다.',
+      });
+    },
+    onError: () => {
+      Swal.fire({
+        icon: 'error',
+        text: '게시물 수정에 실패했습니다.',
+      });
     },
   });
 };
