@@ -20,13 +20,13 @@ const Home = () => {
     setDeleteOn((prev) => !prev);
   };
   return (
-    <div className='min-h-screen flex flex-col justify-center items-center w-[1600px] mx-auto mb-8'>
+    <div className='min-h-screen flex flex-col justify-center items-center w-[1260px] mx-auto mb-8'>
       <div className='my-[50px]'>
         <SearchBox setFilteredBooks={setFilteredBooks} />
       </div>
       <div className='w-full flex justify-end gap-4'>
         <Button
-          className='px-4 py-2 bg-slate-700 text-white rounded hover:bg-blue-800 font-bold'
+          className='px-2 py-1 bg-slate-700 text-white rounded hover:bg-blue-800 font-bold'
           text={deleteOn === false ? '게시물 삭제' : '완료'}
           onClick={handleOnDeleteBook}
         />
