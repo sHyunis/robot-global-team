@@ -1,3 +1,27 @@
+- **프로젝트명** &nbsp; :&nbsp;
+  **BookStore**
+
+## [프로젝트 바로가기](https://robot-global-team.vercel.app/)
+
+- **진행 기간** &nbsp;: &nbsp;
+  **24.12.4 ~ 24.12.5**
+
+## 👨‍🏫 프로젝트 기능
+
+### 메인페이지
+
+- 게시물 등록
+- 게시물 삭제
+- 페이지네이션
+- 제목, 작가 검색
+- 책 grid
+- Skeleton UI
+
+### 상세페이지
+
+- 게시물 수정
+- 상세 정보 조회
+
 ## 기술 스택
 
 **패키지 매니저**
@@ -12,6 +36,16 @@
 **상태 관리**
 
 <img src="https://img.shields.io/badge/zustand-orange?style=for-the-badge&logo=zustand&logoColor=white"> <img src="https://img.shields.io/badge/Tanstack Query-FF4154?style=for-the-badge&logo=ReactQuery&logoColor=white">
+
+**데이터베이스**
+
+  <img src="https://img.shields.io/badge/Supabase-3FCF8E?style=for-the-badge&logo=Supabase&logoColor=white">
+
+**배포**
+
+<img src="https://img.shields.io/badge/Vercel-000000?style=for-the-badge&logo=Vercel&logoColor=white">
+
+---
 
 ## Git Commit Convention
 
