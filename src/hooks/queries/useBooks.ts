@@ -1,7 +1,7 @@
 'use client';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { QUERY_KEYS } from './queryKeys';
-import { addBooks, deleteBooks, getBooks, updateBooks } from '@/lib/book';
+import { addBooks, deleteBooks, getBooks, getBooksPagenation, updateBooks } from '@/lib/book';
 import { BookType } from '@/types/book.types';
 import Swal from 'sweetalert2';
 
@@ -10,7 +10,20 @@ const ROW = 10;
 export const useGetBooks = () => {
   return useQuery({
     queryKey: QUERY_KEYS.books(),
-    queryFn: async ({ pageParam }) => getBooks({ pageParam: pageParam as number, ROW }),
+    queryFn: getBooks,
+  });
+};
+
+export const useGetPagenationBooks = (currentPage: number, itemsPerPage: number) => {
+  return useQuery({
+    queryKey: ['books', currentPage, itemsPerPage],
+    queryFn: async () => {
+      const { data, totalCount } = await getBooksPagenation({
+        pageParam: currentPage - 1,
+        ROW: itemsPerPage,
+      });
+      return { data, totalCount };
+    },
   });
 };
 

@@ -4,6 +4,7 @@ import Modal from '../ui/Modal';
 import { useUpdateBooks } from '@/hooks/queries/useBooks';
 import { BookType } from '@/types/book.types';
 import { getStoragePublicUrl } from '@/lib/book';
+import Button from '../ui/Button';
 
 type UpdateModalId = {
   bookData: BookType;
@@ -49,7 +50,7 @@ const UpdateModal: React.FC<UpdateModalId> = ({ bookData }) => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    console.log('Submitting Data:', writeData);
+
     updateMutation.mutate({ bookData: writeData, id: bookData.id });
 
     setIsModalOpen(false);
@@ -57,12 +58,11 @@ const UpdateModal: React.FC<UpdateModalId> = ({ bookData }) => {
 
   return (
     <div>
-      <button
+      <Button
         onClick={handleOpenModal}
         className='px-4 py-2 bg-slate-700 text-white rounded hover:bg-blue-800 font-bold'
-      >
-        게시물 수정
-      </button>
+        text='게시물 수정'
+      />
 
       <Modal
         isOpen={isModalOpen}
@@ -98,6 +98,7 @@ const UpdateModal: React.FC<UpdateModalId> = ({ bookData }) => {
               value={writeData.book_sold}
               onChange={handleChange}
               required
+              maxLength={8}
             />
           </label>
           <label className='block mb-2 text-[20px]'>
@@ -108,6 +109,7 @@ const UpdateModal: React.FC<UpdateModalId> = ({ bookData }) => {
               className='w-full border rounded px-2 py-1 mt-1'
               value={writeData.book_name}
               onChange={handleChange}
+              maxLength={15}
               required
             />
           </label>
@@ -119,34 +121,34 @@ const UpdateModal: React.FC<UpdateModalId> = ({ bookData }) => {
               className='w-full border rounded px-2 py-1 mt-1'
               value={writeData.book_writer}
               onChange={handleChange}
+              maxLength={15}
               required
             />
           </label>
           <label className='block mb-2 text-[20px]'>
-            내용
+            내용 (600자 이하)
             <textarea
               name='book_content'
               className='w-full border rounded px-2 py-1 mt-1'
               rows={12}
               value={writeData.book_content}
               onChange={handleChange}
+              maxLength={600}
               required
             ></textarea>
           </label>
           <div className='flex justify-end mt-4'>
-            <button
+            <Button
               type='button'
               onClick={handleCloseModal}
               className='px-4 py-2 bg-gray-300 rounded mr-2'
-            >
-              취소
-            </button>
-            <button
+              text='취소'
+            />
+            <Button
               type='submit'
               className='px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-700'
-            >
-              등록
-            </button>
+              text='등록'
+            />
           </div>
         </form>
       </Modal>

@@ -2,22 +2,41 @@ import { BookType } from '@/types/book.types';
 import { supabase } from '@/utils/supabase/supabase';
 import { v4 as uuidv4 } from 'uuid';
 
-type BookProps = {
-  pageParam: number;
-  ROW: number;
-};
-
-export const getBooks = async ({ pageParam = 0, ROW }: BookProps) => {
-  const { data, error } = await supabase
-    .from('books')
-    .select('*')
-    .range(pageParam, pageParam + ROW - 1);
+export const getBooks = async () => {
+  const { data, error } = await supabase.from('books').select('*');
 
   if (error) {
     console.error(error);
   }
 
   if (data) return data;
+};
+
+type BookProps = {
+  pageParam: number;
+  ROW: number;
+};
+
+export type BookPaginationResponse = {
+  data: BookType[];
+  totalCount: number;
+};
+
+export const getBooksPagenation = async ({ pageParam = 0, ROW }: BookProps): Promise<BookPaginationResponse> => {
+  console.log('Fetching books with params:', { pageParam, ROW });
+
+  const { data, error, count } = await supabase
+    .from('books')
+    .select('*', { count: 'exact' })
+    .range(pageParam * ROW, (pageParam + 1) * ROW - 1);
+
+  if (error) {
+    console.error('Supabase error:', error);
+    return { data: [], totalCount: 0 };
+  }
+
+  console.log('Fetched data:', { data, count });
+  return { data: data || [], totalCount: count || 0 };
 };
 
 export const addBooks = async (bookData: BookType) => {
