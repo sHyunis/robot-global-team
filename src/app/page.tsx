@@ -13,7 +13,7 @@ const Home = () => {
       <div className='my-[50px]'>
         <SearchBox setFilteredBooks={setFilteredBooks} />
       </div>
-      <div className='w-full flex justify-end'>
+      <div className='w-full flex justify-end gap-4'>
         <WriteModal />
       </div>
       <section className='w-full'>
