@@ -47,9 +47,9 @@ const BookList: React.FC<BookListProps> = ({ books, onDelete, deleteState }) => 
               <Image
                 src={'/icon/closeIcon.svg'}
                 alt='닫기'
-                width={30}
-                height={30}
-                className='absolute right-2 top-2 '
+                width={25}
+                height={25}
+                className='absolute right-2 top-2 bg-slate-700 rounded text-white z-20'
                 onClick={() => onDelete(book.id)}
               />
             )}
