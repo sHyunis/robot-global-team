@@ -9,7 +9,7 @@ const Home = () => {
   const [filteredBooks, setFilteredBooks] = useState<BookType[]>([]);
 
   return (
-    <div className='min-h-screen flex flex-col justify-center items-center w-[1600px] mx-auto'>
+    <div className='min-h-screen flex flex-col justify-center items-center w-[1600px] mx-auto mb-8'>
       <div className='my-[50px]'>
         <SearchBox setFilteredBooks={setFilteredBooks} />
       </div>
