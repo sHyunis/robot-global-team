@@ -6,11 +6,11 @@ import { v4 as uuidv4 } from 'uuid';
 const WriteModal = () => {
   const addMutation = useAddBooks();
   const handleAdd = (data: BookType) => addMutation.mutate(data);
-
+  const id = uuidv4();
   return (
     <BookFormModal
       initialData={{
-        id: uuidv4(),
+        id: id,
         book_writer: '',
         book_image: '',
         book_name: '',
