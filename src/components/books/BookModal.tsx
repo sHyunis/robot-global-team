@@ -4,6 +4,7 @@ import { BookType } from '@/types/book.types';
 import { getStoragePublicUrl } from '@/lib/book';
 import Button from '../ui/Button';
 import Input from '../ui/Input';
+import Image from 'next/image';
 
 type BookFormModalProps = {
   initialData: BookType;
@@ -30,26 +31,26 @@ const BookFormModal: React.FC<BookFormModalProps> = ({ initialData, onSubmit, is
   const INPUTMENUS = [
     {
       label: '판매수량',
-      type: 'number' as 'number',
+      type: 'number',
       name: 'book_sold',
       value: formData.book_sold,
       maxLength: 8,
     },
     {
       label: '제목',
-      type: 'text' as 'text',
+      type: 'text',
       name: 'book_name',
       value: formData.book_name,
       maxLength: 15,
     },
     {
       label: '작가',
-      type: 'text' as 'text',
+      type: 'text',
       name: 'book_writer',
       value: formData.book_writer,
       maxLength: 15,
     },
-  ];
+  ] as const;
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
@@ -88,10 +89,12 @@ const BookFormModal: React.FC<BookFormModalProps> = ({ initialData, onSubmit, is
           {previewImage && (
             <div className='mb-2'>
               <p>현재 이미지:</p>
-              <img
+              <Image
                 src={previewImage}
                 alt='book preview'
-                className='w-32 h-32 object-cover border rounded'
+                width={120}
+                height={120}
+                className=' border rounded'
               />
             </div>
           )}
