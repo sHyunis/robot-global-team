@@ -28,6 +28,7 @@ const BookFormModal: React.FC<BookFormModalProps> = ({ initialData, onSubmit, is
       setFormData((prev) => ({ ...prev, book_image: publicUrl }));
     }
   };
+
   const INPUTMENUS = [
     {
       label: '판매수량',
@@ -61,6 +62,7 @@ const BookFormModal: React.FC<BookFormModalProps> = ({ initialData, onSubmit, is
     e.preventDefault();
     onSubmit(formData);
     handleCloseModal();
+    setFormData(initialData);
   };
 
   return (
@@ -76,7 +78,7 @@ const BookFormModal: React.FC<BookFormModalProps> = ({ initialData, onSubmit, is
       >
         <h2 className='text-[22px] font-bold mb-4 text-center'>{isUpdate ? '게시물 수정' : '게시물 작성'}</h2>
         <form onSubmit={handleSubmit}>
-          {previewImage && (
+          {isUpdate && (
             <div className='mb-2'>
               <p className='font-medium text-[16px]'>현재 이미지:</p>
               <Image
