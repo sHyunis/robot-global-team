@@ -55,12 +55,12 @@ const SearchBox = ({ setFilteredBooks }: SearchBoxProps) => {
     <div className='relative'>
       <form
         onSubmit={handleSubmit}
-        className='w-[800px] h-[60px] border-2 border-solid border-slate-700 rounded-[12px] flex items-center overflow-hidden '
+        className='w-[500px] h-[40px] border-2 border-solid border-slate-700 rounded-[12px] flex items-center overflow-hidden '
       >
         <select
           value={searchOption}
           onChange={(e) => setSearchOption(e.target.value)}
-          className='h-full pl-[16px] text-[20px] font-medium border-r-2 border-solid border-slate-700 outline-none'
+          className='h-full pl-[16px] text-[18px] font-medium border-r-2 border-solid border-slate-700 outline-none'
         >
           <option value='title'>제목</option>
           <option value='author'>작가</option>
@@ -68,12 +68,12 @@ const SearchBox = ({ setFilteredBooks }: SearchBoxProps) => {
         <input
           type='text'
           placeholder='책을 검색해주세요'
-          className='w-[700px] h-full pl-[16px] text-[20px] outline-none'
+          className='w-[700px] h-full pl-[16px] text-[18px] outline-none'
           value={searchContent}
           onChange={handleSearchChange}
         />
         <Button
-          className='bg-slate-700 w-[100px] h-full text-white font-bold flex justify-center items-center cursor-pointer text-[20px]'
+          className='bg-slate-700 w-[100px] h-full text-white font-bold flex justify-center items-center cursor-pointer text-[18px]'
           text='검색'
         />
       </form>

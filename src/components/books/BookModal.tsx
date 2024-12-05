@@ -67,28 +67,18 @@ const BookFormModal: React.FC<BookFormModalProps> = ({ initialData, onSubmit, is
     <div>
       <Button
         onClick={handleOpenModal}
-        className='px-4 py-2 bg-slate-700 text-white rounded hover:bg-blue-800 font-bold'
+        className='px-2 py-1 bg-slate-700 text-white rounded hover:bg-blue-800 font-bold font-[18px]'
         text={isUpdate ? '게시물 수정' : '게시물 작성'}
       />
       <Modal
         isOpen={isModalOpen}
         onClose={handleCloseModal}
       >
-        <h2 className='text-[27px] font-bold mb-4 text-center'>{isUpdate ? '게시물 수정' : '게시물 작성'}</h2>
+        <h2 className='text-[22px] font-bold mb-4 text-center'>{isUpdate ? '게시물 수정' : '게시물 작성'}</h2>
         <form onSubmit={handleSubmit}>
-          <label className='block mb-2 flex items-center gap-3 text-[20px]'>
-            이미지
-            <Input
-              type='file'
-              name='book_image'
-              className='flex-1 border rounded px-2 py-1 mt-1 cursor-pointer'
-              onChange={handleFileChange}
-              required={!isUpdate}
-            />
-          </label>
           {previewImage && (
             <div className='mb-2'>
-              <p>현재 이미지:</p>
+              <p className='font-medium text-[16px]'>현재 이미지:</p>
               <Image
                 src={previewImage}
                 alt='book preview'
@@ -98,28 +88,40 @@ const BookFormModal: React.FC<BookFormModalProps> = ({ initialData, onSubmit, is
               />
             </div>
           )}
-          {INPUTMENUS.map((menu, index) => (
-            <label
-              className='block mb-2 text-[20px]'
-              key={index}
-            >
-              {menu.label}
-              <Input
-                className='w-full border rounded px-2 py-1 mt-1'
-                type={menu.type}
-                name={menu.name}
-                onChange={handleChange}
-                value={menu.value}
-                maxLength={menu.maxLength}
-              />
-            </label>
-          ))}
-          <label className='block mb-2 text-[20px]'>
+          <label className='block mb-2 flex items-center gap-3 font-medium text-[16px]'>
+            이미지
+            <Input
+              type='file'
+              name='book_image'
+              className=' border rounded px-1 py-1 mt-1 cursor-pointer'
+              onChange={handleFileChange}
+              required={!isUpdate}
+            />
+          </label>
+          <div className='flex gap-8'>
+            {INPUTMENUS.map((menu, index) => (
+              <label
+                className='block mb-2 font-medium text-[16px]'
+                key={index}
+              >
+                {menu.label}
+                <Input
+                  className='w-full border rounded px-2 py-1 mt-1'
+                  type={menu.type}
+                  name={menu.name}
+                  onChange={handleChange}
+                  value={menu.value}
+                  maxLength={menu.maxLength}
+                />
+              </label>
+            ))}
+          </div>
+          <label className='block mb-2 font-medium text-[16px]'>
             내용 (600자 이하)
             <textarea
               name='book_content'
               className='w-full border rounded px-2 py-1 mt-1'
-              rows={12}
+              rows={6}
               value={formData.book_content}
               onChange={handleChange}
               maxLength={600}

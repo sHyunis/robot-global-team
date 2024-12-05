@@ -1,7 +1,6 @@
 'use client';
 
-const CARDSTYLE =
-  'w-[300px] h-[400px] rounded px-4 py-2 w-full h-full flex flex-col justify-center items-center bg-gray-200';
+const CARDSTYLE = 'w-full h-[400px] rounded px-4 py-2 flex flex-col justify-center items-center bg-gray-200';
 const CARDCOUNT = 10;
 const HomeLoading = () => {
   return (
