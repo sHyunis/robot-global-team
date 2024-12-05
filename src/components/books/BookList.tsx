@@ -5,14 +5,17 @@ import Link from 'next/link';
 import Button from '../ui/Button';
 import { useGetPagenationBooks } from '@/hooks/queries/useBooks';
 import HomeLoading from '../loading/HomeLoading';
+import Image from 'next/image';
 
 type BookListProps = {
-  books: BookType[] | null; // 검색된 데이터 (클라이언트 페이지네이션)
+  books: BookType[] | null;
+  onDelete: (bookId: string) => void;
+  deleteState: boolean;
 };
 
 const ITEMSPERPAGE = 10;
 
-const BookList: React.FC<BookListProps> = ({ books }) => {
+const BookList: React.FC<BookListProps> = ({ books, onDelete, deleteState }) => {
   const [currentPage, setCurrentPage] = useState(1);
   const { data: bookData, isLoading } = useGetPagenationBooks(currentPage, ITEMSPERPAGE);
 
@@ -36,13 +39,25 @@ const BookList: React.FC<BookListProps> = ({ books }) => {
     <div>
       <div className='grid grid-cols-5 grid-rows-2 gap-4'>
         {displayBooks?.map((book) => (
-          <Link
-            href={`/detail/${book.id}`}
+          <div
             key={book.id}
-            className='cursor-pointer'
+            className='cursor-pointer relative'
           >
-            <BookCard book={book} />
-          </Link>
+            {deleteState === true && (
+              <Image
+                src={'/icon/closeIcon.svg'}
+                alt='닫기'
+                width={30}
+                height={30}
+                className='absolute right-2 top-2 '
+                onClick={() => onDelete(book.id)}
+              />
+            )}
+
+            <Link href={`/detail/${book.id}`}>
+              <BookCard book={book} />
+            </Link>
+          </div>
         ))}
       </div>
 

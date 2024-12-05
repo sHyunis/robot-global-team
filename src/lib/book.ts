@@ -23,8 +23,6 @@ export type BookPaginationResponse = {
 };
 
 export const getBooksPagenation = async ({ pageParam = 0, ROW }: BookProps): Promise<BookPaginationResponse> => {
-  console.log('Fetching books with params:', { pageParam, ROW });
-
   const { data, error, count } = await supabase
     .from('books')
     .select('*', { count: 'exact' })
@@ -35,7 +33,6 @@ export const getBooksPagenation = async ({ pageParam = 0, ROW }: BookProps): Pro
     return { data: [], totalCount: 0 };
   }
 
-  console.log('Fetched data:', { data, count });
   return { data: data || [], totalCount: count || 0 };
 };
 
